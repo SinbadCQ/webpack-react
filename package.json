@@ -2,10 +2,10 @@
   "name": "webpack-app",
   "version": "1.0.0",
   "description": "webpack-app test",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "start": "webpack-dev-server --inline",
-    "build": "webpack"
+    "dev": "webpack-dev-server --config build/webpack.config.js --inline",
+    "build": "webpack --config build/webpack.config.js"
   },
   "author": "Sinbad",
   "license": "ISC",

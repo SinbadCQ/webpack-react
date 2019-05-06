@@ -5,8 +5,8 @@ module.exports = {
     mode: 'development',
     entry: './src/main.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, '../dist'),
+        filename: 'index.js'
     },
     module: {
         rules: [
@@ -15,10 +15,10 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: [
-                    path.resolve(__dirname, "src")
+                    path.resolve(__dirname, "../src")
                 ],
                 options: {
-                    presets: ["es2015", "react", "stage-0"]
+                    presets: ["es2015", "react"]
                 },
             },
         ]
@@ -27,7 +27,7 @@ module.exports = {
         new HtmlWebpackPlugin({ template: './index.html' })
     ],
     devServer: {
-        contentBase: path.join(__dirname, '/asset'),
+        contentBase: path.join(__dirname, '../src/assets'),
         compress: true,
         host: 'localhost',
         port: 9000
