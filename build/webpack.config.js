@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    // 内置优化
     mode: 'development',
     entry: './src/main.js',
     output: {
@@ -10,15 +11,22 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.txt$/, use: 'raw-loader' },
             {
-                test: /\.js$/,
+                test: /\.css$/,
+                loader: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+            {//ES6、JSX处理
+                test: /(\.jsx|\.js)$/,
                 loader: 'babel-loader',
+                exclude: /node_modules/,
                 include: [
-                    path.resolve(__dirname, "../src")
+                    path.resolve(__dirname, '../src')
                 ],
                 options: {
-                    presets: ["es2015", "react"]
+                    presets: ['es2015', 'react']
                 },
             },
         ]
@@ -28,8 +36,16 @@ module.exports = {
     ],
     devServer: {
         contentBase: path.join(__dirname, '../src/assets'),
+        // 启用gzip压缩所有服务
         compress: true,
         host: 'localhost',
-        port: 9000
+        port: 9000,
+        inline: true,
+        // 显示进度条
+        progress: true,
+        // 打开默认浏览器
+        open: false,
+        // 允许使用本地ip地址打开
+        useLocalIp: false
     }
 }
