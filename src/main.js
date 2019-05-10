@@ -1,28 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { HashRouter as Router, Switch, Redirect } from 'react-router-dom'
-import routes from './router'
-import NestedRoutes from './components/nestedRoutes'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import rootReducer from './reducers'
+import App from './App.js'
 
-class App extends React.Component {
-    render() {
-        return (
-            <Router>
-                <Switch>
-                    {
-                        routes.map((route) => (
-                            // 嵌套路由
-                            <NestedRoutes {...route} key={route.path} />
-                        ))
-                    }
-                    <Redirect from='/' to='/' />
-                </Switch>
-            </Router>
-        )
-    }
-}
+const store = createStore(rootReducer)
 
 ReactDOM.render(
-    <App />,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('root')
 )

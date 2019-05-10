@@ -2,13 +2,25 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { Button, Layout, Menu, Breadcrumb, Icon } from 'antd'
+import { connect } from 'react-redux';
 
 const { SubMenu } = Menu;
 const {
     Header, Content, Footer, Sider,
 } = Layout;
 
-export default class Home extends React.Component {
+class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0
+        }
+    }
+
+    componentDidMount() {
+        // console.log(this.state)
+    }
+
     render() {
         return (
             <div className="home">
@@ -85,3 +97,19 @@ export default class Home extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        state
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        userChange: (userName) => dispatch({ type: 'LOGINUSER', userName: userName }),
+        passChange: (passWord) => dispatch({ type: 'LOGINPASS', passWord: passWord })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
